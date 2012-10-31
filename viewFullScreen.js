@@ -11,10 +11,9 @@
 
          //pass the options variable to the function
          viewFullScreen: function (options) {
-
              //Set the default values, use comma to separate the settings, example:
              var defaults = {
-                 element: null
+                 wholePage: false
              }
 
              var options = $.extend(defaults, options);
@@ -25,13 +24,22 @@
                  $(this).click(function () {
                      var docElm = document.documentElement;
                      if (docElm.requestFullscreen) {
-                         docElm.requestFullscreen();
+                         if (options.wholePage)
+                             docElm.requestFullscreen();
+                         else
+                             this.requestFullscreen();
                      }
                      else if (docElm.mozRequestFullScreen) {
-                         docElm.mozRequestFullScreen();
+                         if (options.wholePage)
+                             docElm.mozRequestFullScreen();
+                         else
+                             this.mozRequestFullScreen();
                      }
                      else if (docElm.webkitRequestFullScreen) {
-                         docElm.webkitRequestFullScreen();
+                         if (options.wholePage)
+                             docElm.webkitRequestFullScreen();
+                         else
+                             this.webkitRequestFullScreen();
                      }
                  });
 
@@ -51,18 +59,18 @@
                  }*/
 
                  document.addEventListener("fullscreenchange", function () {
-                     debugger;
-                     fullscreenState.innerHTML = (document.fullscreenElement) ? "" : "not ";
+                     //debugger;
+                     //fullscreenState.innerHTML = (document.fullscreenElement) ? "" : "not ";
                  }, false);
 
                  document.addEventListener("mozfullscreenchange", function () {
-                     debugger;
-                     fullscreenState.innerHTML = (document.mozFullScreen) ? "" : "not ";
+                     //debugger;
+                     //fullscreenState.innerHTML = (document.mozFullScreen) ? "" : "not ";
                  }, false);
 
                  document.addEventListener("webkitfullscreenchange", function () {
-                     debugger;
-                     fullscreenState.innerHTML = (document.webkitIsFullScreen) ? "" : "not ";
+                     //debugger;
+                     //fullscreenState.innerHTML = (document.webkitIsFullScreen) ? "" : "not ";
                  }, false);
 
              });
